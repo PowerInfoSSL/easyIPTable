@@ -1,0 +1,202 @@
+#!/usr/bin/python
+
+import os,sys
+#///////////bANNER
+bn="""
+
+          __        _______ _     ____ ___  __  __ _____ 
+          \ \      / / ____| |   / ___/ _ \|  \/  | ____|
+           \ \ /\ / /|  _| | |  | |  | | | | |\/| |  _|  
+            \ V  V / | |___| |__| |__| |_| | |  | | |___  _   _   _ 
+             \_/\_/  |_____|_____\____\___/|_|  |_|_____|(_| |_| |_)
+                                               
+
+                        Script Crearor: 
+     _   _    _____ _    ____    _____  ___     ___    _   _    _    
+    | | / \  |  ___/ \  |  _ \  |_   _|/ \ \   / / \  | \ | |  / \   
+ _  | |/ _ \ | |_ / _ \ | |_) |   | | / _ \ \ / / _ \ |  \| | / _ \  
+| |_| / ___ \|  _/ ___ \|  _ <    | |/ ___ \ V / ___ \| |\  |/ ___ \ 
+ \___/_/   \_\_|/_/   \_\_| \_\   |_/_/   \_\_/_/   \_\_| \_/_/   \_\
+                                                                     
+Tell: +989170118221   		  Mail: PowerInfoSSL@Gmail.com
+
+
+
+
+
+"""
+print bn
+#//////////////////////////
+#/////////////////////////
+#////////////////////////
+#///////////////////////
+#//////////////////////
+#/////////////////////
+#////////////////////
+#///////////////////
+#//////////////////
+#/////////////////
+#////////////////
+#///////////////
+#//////////////
+#/////////////
+#////////////
+#///////////
+#//////////
+#/////////
+#////////
+#///////
+#//////
+#/////
+#////
+#///
+#//
+#/
+#''''''''''''''Check File's Desaniation
+def fck(name,data=''):
+    if os.path.exists(name)==False:
+        o=open(name,'w')
+        print 'File %s Rebuilding...' % name
+        if data!='':
+            o.write(data)
+        o.close()
+#''''''''''''''DN
+
+    
+#''''''''''''''Really Check File
+fck('white-ip')
+fck('black-ip')
+#''''''''''''''Read IP File
+def op(addr):
+    fl=[]
+    ipl=[]
+    f1=open(addr,'r+')
+    s=f1.readlines()
+    ipl2=[]
+    #*********************************************Menu Item
+    #/////////////Remove Empty Line's
+    for i in range(0,len(s)):
+        if len(s[i])>=4:
+            ipl2.append(s[i].rstrip())
+            #print 'added ',s[i]
+    #**********************************************Close File Opened & Return Valu's
+    f1.close()
+    return ipl2
+#**************************************************Write Data to the File's
+def wr_f(d1,d2):
+    #**********************************************Check Value Alredy Exist or not
+    print '....Checking Uniq Data'
+    ww=op(d1)
+    if d2 in ww:
+        print '          ERROR\n               This Host Alredy Exist .'
+        raw_input('Press any Key to Continue...')
+        dn=1
+        return
+    f=open(d1,'aw')
+    f.write(d2+'\n')
+    f.close()
+    print 'File Upgraded'
+    print '*****your Data: '+d2
+#*****************Save Data to The IPTables
+def file_op(stt):
+    print "\n\n***********************************************\n\n"
+    ws=op(stt)
+    for i in ws:
+        print "[+]  "+i
+
+
+
+#*****************Defain Execute Script
+def exe():
+    os.system('iptables -A INPUT -s '+i+' -j LOG --log-prefix \"Blocked Input IP Address '+i+' .\"')
+    os.system('iptables -A INPUT -s '+i+' -j DROP')
+
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\SHOW MENU////////////////////////////
+#************Process Menu Input
+def new_num2(nu):
+    #'''''''''''''''''''''''
+    s=str(nu)
+    os.system('clear')
+    if s=='1':
+        file_op('white-ip')
+        print 'Allow List Address'
+    elif s=='2':
+        file_op('black-ip')
+        print 'Blocked List Address'
+    elif s=='3':
+        while True:
+            #os.system('clear')
+            print """"
+                1- Whithe List 
+                2- Black List
+                3- Return
+                 """
+            qq=raw_input('Please Select One Item: ')
+            if qq=='1':
+                print '\n'
+                dd=raw_input('Input Allowed Address: ')
+                if len(dd)>=4:
+                    wr_f('white-ip',dd)
+                    #if dn==0:
+                    raw_input('Press Any Key to Return Selection Menu...')
+                    #else:
+                    #   dn=0
+                    continue
+                else:
+                    print '\n'
+                    raw_input('Corroct Please Enter Address') 
+                    continue
+            elif qq=='2':
+                print '\n'
+                dd=raw_input('Input Black Address:')
+                if len(dd)>=4:
+                    wr_f('black-ip',dd)
+                    raw_input('Press Any Key to Return Selection Menu...')
+                    continue
+                else:
+                    print 'Please Enter Corect Address.'
+            elif qq=='3':
+                master_c()
+                break
+            else:
+                print 'Pleae Select Item Number 1 or 2 or 3(to Return Main Menu)'
+    elif s=='10':
+        aa=raw_input( 'Are You Sure to Exit ?(Y/N) ')
+        if aa in ('y','Y','yes','YES'):
+            os.system('reset')
+            exit()
+        else:
+            master_c()
+    elif s=='9':
+        print '\n\n\n*******************Input Rules*******************'
+        pp=os.popen('iptables -L INPUT')
+        ep=pp.readlines()
+        for i in ep:
+            print i.rstrip()
+        print '\n*************************************************'
+    else:
+        print 'Sorry You Selected Incorrect Option! '
+#--Menu TEXT
+def master_c():
+    menu()
+    ff=raw_input("You Majesty Pleas Enter or Select Your Choice : ")
+    new_num2(ff)
+#************************PRINT MENU
+def menu():
+    print '''
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+1- View White List IP\'s
+2- View BlackList IP\'s
+3- Insert New IP in White or Black List
+4- New Rule
+
+9- View Your FireWall Configuration
+10- Exit
+    '''
+while True:
+    #os.system('clear')
+    menu()
+    #print "You Majesty Pleas Enter or Select Your Choice : "
+    ff=raw_input("You Majesty Pleas Enter or Select Your Choice : ")
+    new_num2(ff)
