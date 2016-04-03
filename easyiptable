@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import os,sys
+import os,sys,socket
+from time import sleep
 #///////////bANNER
 """
 
@@ -62,6 +63,7 @@ def fck(name,data=''):
         if data!='':
             o.write(data)
         o.close()
+
 #*********************************************'Show IPTables Data
 def sh_ipt(ch='INPUT'):
     dd=[]
@@ -211,6 +213,10 @@ def new_num2(nu):
                 print key_p()
             elif sw=='3':
                 break
+    elif s=='6':#Auto Detection
+        print 'Enabling Auto Building Blacklist...'
+        os.system('./auto-blk.py')
+        #sleep(3)
     elif s=='10':
         aa=raw_input( 'Are You Sure to Exit ?(Y/N) ')
         if aa in ('y','Y','yes','YES'):
@@ -242,6 +248,8 @@ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 3- Insert New IP in White or Black List
 4- New Rule
 5- Quick Rule
+6- Enable Auto Building Black List
+
 
 9- View Your FireWall Configuration
 10- Exit
